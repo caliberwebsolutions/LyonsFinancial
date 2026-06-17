@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lyons Financial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Cormorant+Garamond:wght@300;400;500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #1a1a1a;
+      --white:   #ffffff;
+      --cream:   #f5f3ef;
+      --gold:    #b8945a;
+      --gold-lt: #c9a97a;
+      --dark:    #111111;
+      --mid:     #3a3a3a;
+      --muted:   #6b6b6b;
+      --border:  #d8d3cc;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Montserrat', sans-serif; color: var(--black); background: var(--white); }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px;
+      height: 72px;
+      background: var(--white);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .nav-logo {
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      text-decoration: none;
+    }
+    .nav-logo .wordmark {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px; font-weight: 700;
+      color: var(--black); letter-spacing: 0.04em; line-height: 1;
+    }
+    .nav-logo .sub {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 8.5px; font-weight: 500;
+      letter-spacing: 0.28em; color: var(--black);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .nav-logo .sub::before,
+    .nav-logo .sub::after { content: ''; display: block; width: 20px; height: 1px; background: var(--black); }
+
+    .nav-links { display: flex; align-items: center; gap: 36px; }
+    .nav-links a {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
+      text-decoration: none; color: var(--mid); text-transform: uppercase;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.active { color: var(--gold); }
+
+    .nav-cta {
+      background: var(--black); color: var(--white) !important;
+      padding: 12px 20px; font-size: 10px !important; letter-spacing: 0.14em !important;
+      transition: background .2s !important;
+    }
+    .nav-cta:hover { background: var(--mid) !important; color: var(--white) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; padding-top: 72px;
+      min-height: 520px;
+      display: flex; align-items: center;
+      overflow: hidden;
+      background: var(--dark);
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(
+          100deg,
+          rgba(8,10,8,0.92) 0%,
+          rgba(8,10,8,0.80) 35%,
+          rgba(10,12,10,0.45) 55%,
+          rgba(10,12,10,0.10) 100%
+        ),
+        url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1800&auto=format&fit=crop&q=80') center center / cover no-repeat;
+    }
+    /* Mountain silhouette SVG overlay */
+    .hero-mountains {
+      position: absolute; bottom: 0; right: 0; left: 0;
+      height: 100%; pointer-events: none; overflow: hidden;
+    }
+    .hero-mountains svg { width: 100%; height: 100%; }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      padding: 80px 80px 80px 80px;
+      max-width: 600px;
+    }
+    .hero-content h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 52px; font-weight: 500; line-height: 1.12;
+      color: var(--white); margin-bottom: 20px;
+    }
+    .hero-divider {
+      width: 48px; height: 2px; background: var(--gold);
+      margin-bottom: 24px;
+    }
+    .hero-content p {
+      font-size: 14px; font-weight: 300; line-height: 1.75;
+      color: rgba(255,255,255,0.80); margin-bottom: 40px;
+      max-width: 380px;
+    }
+    .btn-outline {
+      display: inline-block;
+      padding: 15px 32px;
+      border: 1px solid var(--gold);
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+      text-decoration: none; background: transparent;
+      transition: background .25s, color .25s;
+      cursor: pointer;
+    }
+    .btn-outline:hover { background: var(--gold); color: var(--white); }
+
+    /* ── APPROACH ── */
+    .approach {
+      background: var(--cream);
+      padding: 96px 80px;
+      text-align: center;
+    }
+    .eyebrow {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 20px;
+    }
+    .approach h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px; font-weight: 400; line-height: 1.2;
+      color: var(--black); margin-bottom: 16px;
+    }
+    .section-rule {
+      width: 40px; height: 2px; background: var(--gold);
+      margin: 0 auto 28px;
+    }
+    .approach > p {
+      max-width: 580px; margin: 0 auto 64px;
+      font-size: 14px; font-weight: 300; line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .pillars {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+    }
+    .pillar {
+      padding: 48px 32px;
+      border-right: 1px solid var(--border);
+      display: flex; flex-direction: column; align-items: center; gap: 16px;
+      transition: background .2s;
+    }
+    .pillar:last-child { border-right: none; }
+    .pillar:hover { background: rgba(184,148,90,0.05); }
+    .pillar-icon {
+      width: 44px; height: 44px;
+      color: var(--gold);
+    }
+    .pillar h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px; font-weight: 500; color: var(--black);
+      text-align: center; line-height: 1.3;
+    }
+    .pillar p {
+      font-size: 12.5px; font-weight: 300; line-height: 1.7;
+      color: var(--muted); text-align: center;
+    }
+
+    /* ── ABOUT ── */
+    .about {
+      background: var(--dark);
+      display: grid; grid-template-columns: 420px 1fr;
+      min-height: 460px;
+    }
+    .about-photo {
+      position: relative; overflow: hidden;
+      background: linear-gradient(160deg, #2a2218 0%, #1a1510 100%);
+    }
+    .about-photo .photo-placeholder {
+      position: absolute; inset: 0;
+      display: flex; align-items: flex-end; justify-content: center;
+      background: linear-gradient(
+        to bottom,
+        #2c2015 0%, #3d2d1a 30%, #2a1e0e 60%, #1a140a 100%
+      );
+      overflow: hidden;
+    }
+    /* Silhouette figure */
+    .about-photo .photo-placeholder svg {
+      width: 75%; height: 90%; opacity: 0.55;
+      filter: drop-shadow(0 -8px 24px rgba(184,148,90,0.12));
+    }
+    .about-copy {
+      padding: 80px 72px;
+      display: flex; flex-direction: column; justify-content: center; gap: 20px;
+    }
+    .about-copy .eyebrow { text-align: left; margin-bottom: 0; }
+    .about-copy h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 38px; font-weight: 400; line-height: 1.2;
+      color: var(--white); margin-bottom: 4px;
+    }
+    .about-copy .section-rule { margin: 0 0 0; }
+    .about-copy p {
+      font-size: 13.5px; font-weight: 300; line-height: 1.85;
+      color: rgba(255,255,255,0.68); max-width: 480px;
+    }
+    .link-arrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--gold); text-decoration: none;
+      transition: gap .2s;
+    }
+    .link-arrow:hover { gap: 12px; }
+    .link-arrow::after { content: '→'; }
+
+    /* ── SERVICES ── */
+    .services {
+      padding: 96px 80px;
+      background: var(--white);
+    }
+    .services-header { text-align: center; margin-bottom: 64px; }
+    .services-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 40px; font-weight: 400; color: var(--black);
+      margin-bottom: 16px;
+    }
+    .services-header p {
+      font-size: 14px; font-weight: 300; line-height: 1.8;
+      color: var(--muted); max-width: 520px; margin: 0 auto;
+    }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+      background: var(--border);
+    }
+    .service-card {
+      background: var(--white); padding: 52px 40px;
+      display: flex; flex-direction: column; gap: 16px;
+      transition: background .2s;
+    }
+    .service-card:hover { background: var(--cream); }
+    .service-num {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.2em;
+      color: var(--gold);
+    }
+    .service-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px; font-weight: 500; color: var(--black);
+      line-height: 1.3;
+    }
+    .service-card p {
+      font-size: 13px; font-weight: 300; line-height: 1.8;
+      color: var(--muted); flex: 1;
+    }
+    .service-link {
+      font-size: 10.5px; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--gold); text-decoration: none;
+      transition: opacity .2s;
+    }
+    .service-link:hover { opacity: 0.7; }
+
+    /* ── PROCESS ── */
+    .process {
+      padding: 96px 80px;
+      background: var(--cream);
+    }
+    .process-header { text-align: center; margin-bottom: 72px; }
+    .process-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 40px; font-weight: 400; color: var(--black);
+      margin-bottom: 16px;
+    }
+    .process-header p {
+      font-size: 14px; font-weight: 300; line-height: 1.8;
+      color: var(--muted); max-width: 520px; margin: 0 auto;
+    }
+    .process-steps {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 0; position: relative;
+    }
+    .process-steps::before {
+      content: ''; position: absolute;
+      top: 22px; left: calc(12.5% + 20px); right: calc(12.5% + 20px);
+      height: 1px; background: var(--gold-lt); opacity: 0.4;
+    }
+    .step {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 20px; padding: 0 24px; text-align: center;
+    }
+    .step-num {
+      width: 44px; height: 44px; border-radius: 50%;
+      border: 1px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+      color: var(--gold); background: var(--cream);
+      position: relative; z-index: 1;
+    }
+    .step h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px; font-weight: 500; color: var(--black);
+    }
+    .step p {
+      font-size: 12.5px; font-weight: 300; line-height: 1.7;
+      color: var(--muted);
+    }
+
+    /* ── TESTIMONIAL ── */
+    .testimonial {
+      background: var(--black);
+      padding: 96px 80px; text-align: center;
+    }
+    .testimonial blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px; font-weight: 400; font-style: italic;
+      color: var(--white); line-height: 1.55;
+      max-width: 760px; margin: 0 auto 32px;
+    }
+    .testimonial cite {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); font-style: normal;
+    }
+
+    /* ── CTA BAND ── */
+    .cta-band {
+      padding: 96px 80px; text-align: center;
+      background: var(--white);
+    }
+    .cta-band h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 40px; font-weight: 400; color: var(--black);
+      margin-bottom: 16px; line-height: 1.2;
+    }
+    .cta-band p {
+      font-size: 14px; font-weight: 300; line-height: 1.8;
+      color: var(--muted); max-width: 480px; margin: 0 auto 40px;
+    }
+    .btn-solid {
+      display: inline-block; padding: 16px 40px;
+      background: var(--black); color: var(--white);
+      font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+      text-decoration: none; transition: background .2s;
+    }
+    .btn-solid:hover { background: var(--mid); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      padding: 64px 80px 40px;
+    }
+    .footer-top {
+      display: grid; grid-template-columns: 280px 1fr 1fr 1fr;
+      gap: 48px; padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 40px;
+    }
+    .footer-brand .wordmark {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px; font-weight: 700;
+      color: var(--white); letter-spacing: 0.04em;
+    }
+    .footer-brand .sub {
+      font-size: 8px; font-weight: 500; letter-spacing: 0.28em;
+      color: rgba(255,255,255,0.5);
+      display: flex; align-items: center; gap: 6px; margin-bottom: 20px;
+    }
+    .footer-brand .sub::before,
+    .footer-brand .sub::after { content: ''; display: block; width: 16px; height: 1px; background: rgba(255,255,255,0.4); }
+    .footer-brand p {
+      font-size: 12.5px; font-weight: 300; line-height: 1.75;
+      color: rgba(255,255,255,0.5);
+    }
+    .footer-col h4 {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 20px;
+    }
+    .footer-col a {
+      display: block; font-size: 13px; font-weight: 300;
+      color: rgba(255,255,255,0.6); text-decoration: none;
+      margin-bottom: 12px; transition: color .2s;
+    }
+    .footer-col a:hover { color: var(--white); }
+    .footer-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-bottom p {
+      font-size: 11.5px; font-weight: 300; color: rgba(255,255,255,0.35);
+    }
+    .footer-bottom a {
+      font-size: 11.5px; font-weight: 300; color: rgba(255,255,255,0.35);
+      text-decoration: none; transition: color .2s;
+    }
+    .footer-bottom a:hover { color: rgba(255,255,255,0.7); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      nav { padding: 0 32px; }
+      .nav-links { gap: 24px; }
+      .hero-content { padding: 60px 48px; }
+      .hero-content h1 { font-size: 42px; }
+      .approach, .services, .process, .cta-band { padding: 72px 48px; }
+      .about-copy { padding: 60px 48px; }
+      .testimonial { padding: 72px 48px; }
+      footer { padding: 48px 48px 32px; }
+      .pillars { grid-template-columns: repeat(2, 1fr); }
+      .pillar:nth-child(2) { border-right: none; }
+      .pillar { border-bottom: 1px solid var(--border); }
+      .pillar:nth-child(3), .pillar:nth-child(4) { border-bottom: none; }
+    }
+    @media (max-width: 860px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .hero-content { padding: 56px 32px; max-width: 100%; }
+      .hero-content h1 { font-size: 36px; }
+      .approach, .services, .process, .cta-band { padding: 64px 32px; }
+      .about { grid-template-columns: 1fr; }
+      .about-photo { min-height: 300px; }
+      .about-copy { padding: 52px 32px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr 1fr; gap: 48px; }
+      .process-steps::before { display: none; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .testimonial { padding: 64px 32px; }
+      .testimonial blockquote { font-size: 22px; }
+      footer { padding: 48px 24px 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <span class="wordmark">LYONS</span>
+      <span class="sub">FINANCIAL</span>
+    </a>
+    <div class="nav-links">
+      <a href="#" class="active">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#resources">Resources</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="nav-cta">Schedule a Call</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <!-- photo backdrop, no SVG overlay needed -->
+    <div class="hero-mountains" style="display:none;">
+      <svg viewBox="0 0 1440 520" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <!-- Mist gradient fading up from midpoint -->
+          <linearGradient id="mistGrad" x1="0" y1="1" x2="0" y2="0">
+            <stop offset="0%" stop-color="#1e3530" stop-opacity="0.0"/>
+            <stop offset="40%" stop-color="#2a4540" stop-opacity="0.18"/>
+            <stop offset="70%" stop-color="#3a5550" stop-opacity="0.28"/>
+            <stop offset="100%" stop-color="#4a6560" stop-opacity="0.0"/>
+          </linearGradient>
+          <!-- Distant tree layer tint -->
+          <linearGradient id="farTreeGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#2a4038"/>
+            <stop offset="100%" stop-color="#1a2e24"/>
+          </linearGradient>
+          <linearGradient id="midTreeGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#1e3028"/>
+            <stop offset="100%" stop-color="#121e18"/>
+          </linearGradient>
+          <linearGradient id="nearTreeGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#111a14"/>
+            <stop offset="100%" stop-color="#080e0a"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Distant rolling ridge — soft, hazy -->
+        <path d="M0,520 L0,300 Q60,280 100,290 Q140,275 180,260 Q230,250 270,255 Q310,248 360,238 Q420,228 480,235 Q530,240 570,228 Q620,218 670,222 Q730,215 790,208 Q850,202 910,210 Q960,218 1000,205 Q1060,192 1120,198 Q1180,204 1230,195 Q1290,185 1350,190 Q1400,195 1440,188 L1440,520 Z"
+          fill="url(#farTreeGrad)" opacity="0.55"/>
+
+        <!-- Far treeline — sparse pointy evergreens, right side -->
+        <path d="
+          M680,520 L680,265 L690,242 L700,265
+          L708,260 L716,232 L724,260
+          L730,255 L740,228 L750,255
+          L758,250 L768,222 L778,250
+          L784,245 L795,218 L806,245
+          L812,240 L824,212 L836,240
+          L842,235 L854,208 L866,235
+          L872,230 L885,204 L898,230
+          L904,226 L918,200 L932,226
+          L938,222 L952,198 L966,222
+          L972,220 L986,196 L1000,220
+          L1006,218 L1020,194 L1034,218
+          L1040,215 L1055,192 L1070,215
+          L1076,212 L1091,190 L1106,212
+          L1112,210 L1128,188 L1144,210
+          L1150,208 L1167,186 L1184,208
+          L1190,206 L1208,185 L1226,206
+          L1232,204 L1250,184 L1268,204
+          L1274,202 L1293,184 L1312,202
+          L1318,201 L1338,183 L1358,201
+          L1364,200 L1385,183 L1406,200
+          L1412,199 L1426,185 L1440,199 L1440,520 Z"
+          fill="url(#farTreeGrad)" opacity="0.6"/>
+
+        <!-- Mist band across mid-distance -->
+        <rect x="0" y="240" width="1440" height="120" fill="url(#mistGrad)"/>
+
+        <!-- Mid treeline — denser, taller conifers -->
+        <path d="
+          M0,520 L0,330
+          L8,308 L16,330
+          L22,322 L32,295 L42,322
+          L48,315 L60,286 L72,315
+          L78,308 L92,278 L106,308
+          L112,302 L128,270 L144,302
+          L150,295 L168,262 L186,295
+          L192,290 L210,258 L228,290
+          L234,285 L254,250 L274,285
+          L280,278 L302,244 L324,278
+          L330,272 L354,238 L378,272
+          L384,268 L408,234 L432,268
+          L438,262 L464,228 L490,262
+          L496,258 L523,225 L550,258
+          L556,252 L585,220 L614,252
+          L620,248 L650,217 L680,248
+          L686,245 L716,215 L746,245
+          L752,242 L782,213 L812,242
+          L818,240 L848,212 L878,240
+          L884,238 L914,211 L944,238
+          L950,236 L980,210 L1010,236
+          L1016,234 L1048,208 L1080,234
+          L1086,232 L1118,207 L1150,232
+          L1156,230 L1190,206 L1224,230
+          L1230,228 L1265,205 L1300,228
+          L1306,226 L1342,204 L1378,226
+          L1384,224 L1412,204 L1440,224 L1440,520 Z"
+          fill="url(#midTreeGrad)" opacity="0.78"/>
+
+        <!-- Second mist layer, slightly lower -->
+        <ellipse cx="720" cy="360" rx="800" ry="55" fill="#2a4a40" opacity="0.14"/>
+
+        <!-- Near treeline — tall, sharp, foreground conifers -->
+        <path d="
+          M0,520 L0,380
+          L10,352 L20,380
+          L28,368 L42,330 L56,368
+          L64,355 L82,312 L100,355
+          L108,342 L130,295 L152,342
+          L160,330 L185,280 L210,330
+          L218,320 L246,268 L274,320
+          L282,310 L314,255 L346,310
+          L354,300 L390,242 L426,300
+          L434,292 L473,235 L512,292
+          L520,285 L562,228 L604,285
+          L612,278 L658,222 L704,278
+          L712,272 L760,218 L808,272
+          L816,268 L865,215 L914,268
+          L922,265 L972,213 L1022,265
+          L1030,262 L1082,210 L1134,262
+          L1142,260 L1195,209 L1248,260
+          L1256,258 L1310,208 L1364,258
+          L1372,256 L1406,210 L1440,256 L1440,520 Z"
+          fill="url(#nearTreeGrad)" opacity="0.92"/>
+
+        <!-- Ground floor — solid dark base -->
+        <rect x="0" y="430" width="1440" height="90" fill="#080e0a" opacity="0.85"/>
+      </svg>
+    </div>
+    <div class="hero-content">
+      <h1>Financial Planning<br>Built Around You.</h1>
+      <div class="hero-divider"></div>
+      <p>We help individuals, families, and business owners build financial clarity, grow wealth, and create a legacy that lasts.</p>
+      <a href="#contact" class="btn-outline">Schedule a Consultation</a>
+    </div>
+  </section>
+
+  <!-- APPROACH -->
+  <section class="approach">
+    <p class="eyebrow">Our Approach</p>
+    <h2>Clarity. Strategy. Confidence.</h2>
+    <div class="section-rule"></div>
+    <p>We take a comprehensive, personalized approach to financial planning. Our goal is simple: to help you make confident decisions today that lead to a better tomorrow.</p>
+    <div class="pillars">
+      <div class="pillar">
+        <svg class="pillar-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="22" cy="15" r="7"/>
+          <path d="M8 38c0-7.7 6.3-14 14-14s14 6.3 14 14"/>
+        </svg>
+        <h3>Personalized<br>Planning</h3>
+        <p>Every plan is tailored to your goals, values, and unique financial situation.</p>
+      </div>
+      <div class="pillar">
+        <svg class="pillar-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="8" y="28" width="7" height="10" rx="1"/>
+          <rect x="18.5" y="20" width="7" height="18" rx="1"/>
+          <rect x="29" y="12" width="7" height="26" rx="1"/>
+          <polyline points="10,22 18,14 26,18 34,8"/>
+          <polyline points="30,8 34,8 34,12"/>
+        </svg>
+        <h3>Strategic<br>Growth</h3>
+        <p>We design strategies to grow and protect your wealth through every stage of life.</p>
+      </div>
+      <div class="pillar">
+        <svg class="pillar-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 6L10 11v11c0 7.7 5.1 14.9 12 17 6.9-2.1 12-9.3 12-17V11z"/>
+          <polyline points="16,22 20,26 28,18"/>
+        </svg>
+        <h3>Risk<br>Management</h3>
+        <p>We help you manage risk so you can focus on what matters most.</p>
+      </div>
+      <div class="pillar">
+        <svg class="pillar-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="17" cy="17" r="6"/>
+          <circle cx="30" cy="17" r="6"/>
+          <path d="M6 38c0-6 4.9-11 11-11"/>
+          <path d="M27 27c6.1 0 11 4.9 11 11"/>
+          <line x1="22" y1="16" x2="25" y2="16"/>
+        </svg>
+        <h3>Legacy<br>Focus</h3>
+        <p>We help you build a legacy that supports the people and causes you care about.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-photo">
+      <div class="photo-placeholder">
+        <!-- Professional silhouette placeholder -->
+        <svg viewBox="0 0 300 480" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="figGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#c0976e" stop-opacity="0.5"/>
+              <stop offset="60%" stop-color="#7a5535" stop-opacity="0.35"/>
+              <stop offset="100%" stop-color="#3d2010" stop-opacity="0.2"/>
+            </linearGradient>
+          </defs>
+          <!-- Head -->
+          <ellipse cx="150" cy="70" rx="42" ry="50" fill="url(#figGrad)"/>
+          <!-- Neck -->
+          <rect x="135" y="115" width="30" height="25" fill="url(#figGrad)"/>
+          <!-- Suit body -->
+          <path d="M70,480 L70,200 Q70,145 110,140 L140,135 Q150,165 150,165 Q150,165 160,135 L190,140 Q230,145 230,200 L230,480 Z" fill="url(#figGrad)"/>
+          <!-- Lapels -->
+          <path d="M140,135 L120,175 L150,195 L180,175 L160,135" fill="#2a1808" opacity="0.4"/>
+          <!-- Collar/tie area -->
+          <path d="M145,165 L150,185 L155,165" fill="#b8945a" opacity="0.3"/>
+        </svg>
+      </div>
+    </div>
+    <div class="about-copy">
+      <p class="eyebrow">About Lyons Financial</p>
+      <h2>A Partner You Can Trust.</h2>
+      <div class="section-rule" style="margin-bottom:24px;"></div>
+      <p>At Lyons Financial, we believe financial planning is about more than numbers — it's about people, purpose, and peace of mind. We're committed to building lasting relationships and helping you achieve what matters most.</p>
+      <p>With decades of experience serving individuals, families, and business owners, we bring the knowledge and care your financial future deserves.</p>
+      <a href="#" class="link-arrow">Learn More About Our Firm</a>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="services-header">
+      <p class="eyebrow">What We Offer</p>
+      <h2>Comprehensive Financial Services</h2>
+      <div class="section-rule"></div>
+      <p>From retirement planning to estate strategy, we offer a full suite of services designed to address every dimension of your financial life.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-num">01</span>
+        <h3>Retirement Planning</h3>
+        <p>Build a retirement strategy that gives you the freedom to live life on your own terms — without compromise.</p>
+        <a href="#" class="service-link">Learn More →</a>
+      </div>
+      <div class="service-card">
+        <span class="service-num">02</span>
+        <h3>Wealth Management</h3>
+        <p>Grow, protect, and preserve your wealth with a comprehensive, actively managed investment strategy.</p>
+        <a href="#" class="service-link">Learn More →</a>
+      </div>
+      <div class="service-card">
+        <span class="service-num">03</span>
+        <h3>Estate Planning</h3>
+        <p>Ensure your legacy endures. We help you structure your estate so your wealth passes to those you love, efficiently and intentionally.</p>
+        <a href="#" class="service-link">Learn More →</a>
+      </div>
+      <div class="service-card">
+        <span class="service-num">04</span>
+        <h3>Tax Strategy</h3>
+        <p>Proactive tax planning integrated into every aspect of your financial plan — so you keep more of what you earn.</p>
+        <a href="#" class="service-link">Learn More →</a>
+      </div>
+      <div class="service-card">
+        <span class="service-num">05</span>
+        <h3>Business Planning</h3>
+        <p>From succession planning to executive compensation, we help business owners protect what they've built and plan for what's next.</p>
+        <a href="#" class="service-link">Learn More →</a>
+      </div>
+      <div class="service-card">
+        <span class="service-num">06</span>
+        <h3>Insurance & Risk</h3>
+        <p>Identify and close the gaps in your financial protection — life, disability, long-term care, and beyond.</p>
+        <a href="#" class="service-link">Learn More →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process" id="process">
+    <div class="process-header">
+      <p class="eyebrow">How It Works</p>
+      <h2>A Clear Path Forward</h2>
+      <div class="section-rule"></div>
+      <p>Our process is designed to be straightforward, transparent, and focused entirely on you. Here's what to expect when you work with Lyons Financial.</p>
+    </div>
+    <div class="process-steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Discovery Call</h3>
+        <p>We start with a conversation — no pressure, no paperwork. Just a chance to understand your goals and see if we're the right fit.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>Financial Review</h3>
+        <p>We take a comprehensive look at your current financial picture — income, assets, liabilities, and goals — to understand where you stand.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>Custom Strategy</h3>
+        <p>We build a tailored financial plan aligned with your unique life, values, and vision for the future.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h3>Ongoing Partnership</h3>
+        <p>Life changes. Your plan should too. We meet regularly to review your progress and adapt your strategy as your needs evolve.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL -->
+  <section class="testimonial">
+    <blockquote>
+      "Working with Lyons Financial changed how I think about money. For the first time, I feel genuinely confident about my future."
+    </blockquote>
+    <cite>— Sarah M., Client since 2019</cite>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-band" id="contact">
+    <p class="eyebrow">Get Started</p>
+    <h2>Ready to Take the<br>Next Step?</h2>
+    <div class="section-rule"></div>
+    <p>Schedule a complimentary consultation and discover what a truly personalized financial plan can do for you.</p>
+    <a href="#" class="btn-solid">Schedule a Consultation</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="wordmark">LYONS</div>
+        <div class="sub">FINANCIAL</div>
+        <p>Building financial clarity, growing wealth, and creating legacies that last — one relationship at a time.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="#">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#process">Process</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="#">Retirement Planning</a>
+        <a href="#">Wealth Management</a>
+        <a href="#">Estate Planning</a>
+        <a href="#">Tax Strategy</a>
+        <a href="#">Business Planning</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="#">info@lyonsfinancial.com</a>
+        <a href="#">(555) 000-0000</a>
+        <a href="#">Schedule a Call</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Lyons Financial. All rights reserved.</p>
+      <div style="display:flex;gap:24px;">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Disclosures</a>
+        <a href="#">ADV Part 2</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
