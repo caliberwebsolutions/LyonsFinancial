@@ -1,3 +1,19 @@
+None selected 
+
+Skip to content
+Using Gmail with screen readers
+in:sent 
+1 of 123
+(no subject)
+Inbox
+
+Ayden Carpenter <carpenteraydenx@gmail.com>
+Attachments
+10:51 PM (0 minutes ago)
+to me
+
+ One attachment
+  •  Scanned by Gmail
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -317,21 +333,7 @@
       color: var(--muted);
     }
 
-    /* ── TESTIMONIAL ── */
-    .testimonial {
-      background: var(--black);
-      padding: 96px 80px; text-align: center;
-    }
-    .testimonial blockquote {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 28px; font-weight: 400; font-style: italic;
-      color: var(--white); line-height: 1.55;
-      max-width: 760px; margin: 0 auto 32px;
-    }
-    .testimonial cite {
-      font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--gold); font-style: normal;
-    }
+
 
     /* ── CTA BAND ── */
     .cta-band {
@@ -404,6 +406,79 @@
     }
     .footer-bottom a:hover { color: rgba(255,255,255,0.7); }
 
+    /* ── PRICING ── */
+    .pricing {
+      padding: 96px 80px;
+      background: var(--black);
+    }
+    .pricing-header { text-align: center; margin-bottom: 64px; }
+    .pricing-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 40px; font-weight: 400; color: var(--white);
+      margin-bottom: 16px;
+    }
+    .pricing-header .eyebrow { color: var(--gold); }
+    .pricing-header p {
+      font-size: 14px; font-weight: 300; line-height: 1.8;
+      color: rgba(255,255,255,0.55); max-width: 480px; margin: 0 auto;
+    }
+    .pricing-header .section-rule { background: var(--gold); }
+    .pricing-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 24px; max-width: 860px; margin: 0 auto;
+    }
+    .pricing-card {
+      background: #1e1e1e;
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 48px 40px;
+      display: flex; flex-direction: column; gap: 32px;
+      position: relative;
+      transition: border-color .2s;
+    }
+    .pricing-card:hover { border-color: rgba(184,148,90,0.3); }
+    .pricing-featured {
+      background: #242018;
+      border-color: var(--gold);
+    }
+    .pricing-featured:hover { border-color: var(--gold-lt); }
+    .pricing-badge {
+      position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+      background: var(--gold); color: var(--white);
+      font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+      padding: 5px 16px;
+    }
+    .pricing-top { display: flex; flex-direction: column; gap: 8px; }
+    .pricing-top h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px; font-weight: 500; color: var(--white); line-height: 1.3;
+    }
+    .price {
+      font-family: 'Playfair Display', serif;
+      font-size: 56px; font-weight: 400; color: var(--gold); line-height: 1;
+      display: flex; align-items: flex-start; gap: 2px;
+    }
+    .dollar { font-size: 24px; margin-top: 10px; }
+    .price-period { font-size: 20px; color: rgba(184,148,90,0.7); align-self: flex-end; margin-bottom: 8px; }
+    .price-sub {
+      font-size: 11px; font-weight: 400; letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.35); text-transform: uppercase;
+    }
+    .pricing-features {
+      list-style: none; display: flex; flex-direction: column; gap: 14px; flex: 1;
+    }
+    .pricing-features li {
+      font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.72);
+      padding-left: 20px; position: relative; line-height: 1.5;
+    }
+    .pricing-features li::before {
+      content: '—'; position: absolute; left: 0;
+      color: var(--gold); font-size: 11px;
+    }
+    .pricing-note {
+      font-size: 11px; font-weight: 400; color: rgba(184,148,90,0.6);
+      text-align: center; margin-top: -16px;
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 1100px) {
       nav { padding: 0 32px; }
@@ -411,8 +486,6 @@
       .hero-content { padding: 60px 48px; }
       .hero-content h1 { font-size: 42px; }
       .approach, .services, .process, .cta-band { padding: 72px 48px; }
-      .about-copy { padding: 60px 48px; }
-      .testimonial { padding: 72px 48px; }
       footer { padding: 48px 48px 32px; }
       .pillars { grid-template-columns: repeat(2, 1fr); }
       .pillar:nth-child(2) { border-right: none; }
@@ -432,8 +505,6 @@
       .process-steps { grid-template-columns: 1fr 1fr; gap: 48px; }
       .process-steps::before { display: none; }
       .footer-top { grid-template-columns: 1fr 1fr; }
-      .testimonial { padding: 64px 32px; }
-      .testimonial blockquote { font-size: 22px; }
       footer { padding: 48px 24px 32px; }
     }
   </style>
@@ -583,7 +654,7 @@
     <div class="hero-content">
       <h1>Financial Planning<br>Built Around You.</h1>
       <div class="hero-divider"></div>
-      <p>We help individuals, families, and business owners build financial clarity, grow wealth, and create a legacy that lasts.</p>
+      <p>We help individuals and families build financial clarity, grow wealth, and create a legacy that lasts.</p>
       <a href="#contact" class="btn-outline">Schedule a Consultation</a>
     </div>
   </section>
@@ -680,7 +751,7 @@
       <div class="section-rule"></div>
       <p>From retirement planning to estate strategy, we offer a full suite of services designed to address every dimension of your financial life.</p>
     </div>
-    <div class="services-grid">
+    <div class="services-grid" style="grid-template-columns: repeat(3,1fr);">
       <div class="service-card">
         <span class="service-num">01</span>
         <h3>Retirement Planning</h3>
@@ -689,32 +760,14 @@
       </div>
       <div class="service-card">
         <span class="service-num">02</span>
-        <h3>Wealth Management</h3>
-        <p>Grow, protect, and preserve your wealth with a comprehensive, actively managed investment strategy.</p>
+        <h3>Investment Analysis</h3>
+        <p>We analyze your portfolio and identify opportunities to grow and protect your wealth through every stage of life.</p>
         <a href="#" class="service-link">Learn More →</a>
       </div>
       <div class="service-card">
         <span class="service-num">03</span>
-        <h3>Estate Planning</h3>
-        <p>Ensure your legacy endures. We help you structure your estate so your wealth passes to those you love, efficiently and intentionally.</p>
-        <a href="#" class="service-link">Learn More →</a>
-      </div>
-      <div class="service-card">
-        <span class="service-num">04</span>
-        <h3>Tax Strategy</h3>
-        <p>Proactive tax planning integrated into every aspect of your financial plan — so you keep more of what you earn.</p>
-        <a href="#" class="service-link">Learn More →</a>
-      </div>
-      <div class="service-card">
-        <span class="service-num">05</span>
-        <h3>Business Planning</h3>
-        <p>From succession planning to executive compensation, we help business owners protect what they've built and plan for what's next.</p>
-        <a href="#" class="service-link">Learn More →</a>
-      </div>
-      <div class="service-card">
-        <span class="service-num">06</span>
-        <h3>Insurance & Risk</h3>
-        <p>Identify and close the gaps in your financial protection — life, disability, long-term care, and beyond.</p>
+        <h3>Financial Budgeting</h3>
+        <p>Take control of your finances with a clear, actionable budget built around your goals and lifestyle.</p>
         <a href="#" class="service-link">Learn More →</a>
       </div>
     </div>
@@ -752,12 +805,54 @@
     </div>
   </section>
 
-  <!-- TESTIMONIAL -->
-  <section class="testimonial">
-    <blockquote>
-      "Working with Lyons Financial changed how I think about money. For the first time, I feel genuinely confident about my future."
-    </blockquote>
-    <cite>— Sarah M., Client since 2019</cite>
+  <!-- PRICING -->
+  <section class="pricing" id="pricing">
+    <div class="pricing-header">
+      <p class="eyebrow">Simple, Transparent Pricing</p>
+      <h2>A Plan That Fits Your Life</h2>
+      <div class="section-rule"></div>
+      <p>No hidden fees, no surprises. Choose the level of support that works best for you.</p>
+    </div>
+    <div class="pricing-grid">
+
+      <!-- One-Time -->
+      <div class="pricing-card">
+        <div class="pricing-top">
+          <h3>One-Time Planning Session</h3>
+          <div class="price"><span class="dollar">$</span>200</div>
+          <p class="price-sub">Single session</p>
+        </div>
+        <ul class="pricing-features">
+          <li>Comprehensive financial review</li>
+          <li>Personalized action plan</li>
+          <li>Investment &amp; budget analysis</li>
+          <li>One dedicated planning meeting</li>
+          <li>Written summary of recommendations</li>
+        </ul>
+        <a href="#contact" class="btn-outline" style="text-align:center; display:block;">Get Started</a>
+      </div>
+
+      <!-- Monthly — featured -->
+      <div class="pricing-card pricing-featured">
+        <div class="pricing-badge">Most Popular</div>
+        <div class="pricing-top">
+          <h3>Ongoing Monthly Planning</h3>
+          <div class="price"><span class="dollar">$</span>150<span class="price-period">/mo</span></div>
+          <p class="price-sub">Cancel anytime</p>
+        </div>
+        <ul class="pricing-features">
+          <li>2 planning meetings per month</li>
+          <li>Unlimited text &amp; email support</li>
+          <li>Ongoing portfolio monitoring</li>
+          <li>Budget &amp; cash flow management</li>
+          <li>Plan adjustments as life changes</li>
+          <li>Priority scheduling</li>
+        </ul>
+        <a href="#contact" class="btn-solid" style="text-align:center; display:block; color:#fff;">Get Started</a>
+        <p class="pricing-note">Best value — ongoing support every step of the way</p>
+      </div>
+
+    </div>
   </section>
 
   <!-- CTA -->
@@ -788,10 +883,8 @@
       <div class="footer-col">
         <h4>Services</h4>
         <a href="#">Retirement Planning</a>
-        <a href="#">Wealth Management</a>
-        <a href="#">Estate Planning</a>
-        <a href="#">Tax Strategy</a>
-        <a href="#">Business Planning</a>
+        <a href="#">Investment Analysis</a>
+        <a href="#">Financial Budgeting</a>
       </div>
       <div class="footer-col">
         <h4>Contact</h4>
@@ -812,3 +905,5 @@
 
 </body>
 </html>
+lyons-financial.html
+Displaying lyons-financial.html.
