@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Lyons Financial Planning</title>
+  <title>Lyons Financial</title>
   <link rel="icon" type="image/jpeg" href="Lion Logo.jpeg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -464,6 +464,50 @@
       text-align: center; margin-top: -16px;
     }
  
+    /* ── HAMBURGER BUTTON ── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column; justify-content: center; gap: 5px;
+      width: 36px; height: 36px; cursor: pointer;
+      background: none; border: none; padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--black); border-radius: 2px;
+      transition: all .3s;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+ 
+    /* ── MOBILE DRAWER ── */
+    .mobile-nav {
+      display: none;
+      position: fixed; top: 72px; left: 0; right: 0; z-index: 99;
+      background: var(--white);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      flex-direction: column;
+      padding: 16px 0 24px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      font-size: 13px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--mid); text-decoration: none;
+      padding: 14px 28px;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+      transition: color .2s, background .2s;
+    }
+    .mobile-nav a:hover { color: var(--black); background: rgba(0,0,0,0.02); }
+    .mobile-nav .mobile-cta {
+      margin: 16px 28px 0;
+      background: var(--black); color: var(--white) !important;
+      text-align: center; padding: 14px 20px;
+      font-size: 11px !important; letter-spacing: 0.14em !important;
+      border-bottom: none !important;
+    }
+    .mobile-nav .mobile-cta:hover { background: var(--mid) !important; }
+ 
     /* ── RESPONSIVE ── */
     @media (max-width: 1100px) {
       nav { padding: 0 32px; }
@@ -478,19 +522,43 @@
       .pillar:nth-child(3), .pillar:nth-child(4) { border-bottom: none; }
     }
     @media (max-width: 860px) {
-      nav { padding: 0 24px; }
+      nav { padding: 0 20px; height: 64px; }
       .nav-links { display: none; }
-      .hero-content { padding: 56px 32px; max-width: 100%; }
-      .hero-content h1 { font-size: 36px; }
-      .approach, .services, .process, .cta-band { padding: 64px 32px; }
+      .nav-hamburger { display: flex; }
+      .hero { min-height: 100svh; }
+      .hero-content { padding: 48px 24px; max-width: 100%; }
+      .hero-content h1 { font-size: 32px; }
+      .hero-content p { font-size: 13px; max-width: 100%; }
+      .approach { padding: 56px 24px; }
+      .approach h2 { font-size: 30px; }
+      .pillars { grid-template-columns: 1fr 1fr; }
+      .pillar { padding: 32px 20px; }
+      .pillar:nth-child(2) { border-right: none; }
+      .pillar { border-bottom: 1px solid var(--border); }
+      .pillar:nth-child(3), .pillar:nth-child(4) { border-bottom: none; }
       .about { grid-template-columns: 1fr; }
-      .about-photo { min-height: 300px; }
-      .about-copy { padding: 52px 32px; }
-      .services-grid { grid-template-columns: 1fr; }
-      .process-steps { grid-template-columns: 1fr 1fr; gap: 48px; }
+      .about-photo { min-height: 280px; }
+      .about-copy { padding: 48px 24px; }
+      .about-copy h2 { font-size: 28px; }
+      .services { padding: 56px 24px; }
+      .services-header h2 { font-size: 28px; }
+      .services-grid { grid-template-columns: 1fr !important; }
+      .service-card { padding: 36px 28px; }
+      .process { padding: 56px 24px; }
+      .process-header h2 { font-size: 28px; }
+      .process-steps { grid-template-columns: 1fr; gap: 40px; }
       .process-steps::before { display: none; }
-      .footer-top { grid-template-columns: 1fr 1fr; }
+      .pricing { padding: 56px 24px; }
+      .pricing-grid { grid-template-columns: 1fr !important; }
+      .pricing-card { padding: 36px 28px; }
+      .cta-band { padding: 56px 24px; }
+      .cta-band h2 { font-size: 28px; }
+      .testimonial { padding: 56px 24px; }
+      .testimonial blockquote { font-size: 20px; }
       footer { padding: 48px 24px 32px; }
+      .footer-top { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+      .footer-bottom div { flex-wrap: wrap; justify-content: center; }
     }
   </style>
 </head>
@@ -511,7 +579,33 @@
       <a href="#contact">Contact</a>
       <a href="tel:+14234865306" class="nav-cta">Schedule a Call</a>
     </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+ 
+  <!-- MOBILE NAV DRAWER -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#" onclick="closeMobileNav()">Home</a>
+    <a href="#about" onclick="closeMobileNav()">About</a>
+    <a href="#services" onclick="closeMobileNav()">Services</a>
+    <a href="#process" onclick="closeMobileNav()">Process</a>
+    <a href="#contact" onclick="closeMobileNav()">Contact</a>
+    <a href="tel:+14234865306" class="mobile-cta">Schedule a Call</a>
+  </div>
+ 
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileNav.classList.toggle('open');
+    });
+    function closeMobileNav() {
+      hamburger.classList.remove('open');
+      mobileNav.classList.remove('open');
+    }
+  </script>
  
   <!-- HERO -->
   <section class="hero">
@@ -798,7 +892,7 @@
       <p>No hidden fees, no surprises. Choose the level of support that works best for you.</p>
     </div>
     <div class="pricing-grid">
-
+ 
       <!-- Monthly — featured FIRST -->
       <div class="pricing-card pricing-featured">
         <div class="pricing-badge">Most Popular</div>
@@ -818,7 +912,7 @@
         <a href="#contact" class="btn-solid" style="text-align:center; display:block; color:#fff;">Get Started</a>
         <p class="pricing-note">Best value — ongoing support every step of the way</p>
       </div>
-
+ 
       <!-- One-Time SECOND -->
       <div class="pricing-card">
         <div class="pricing-top">
@@ -835,7 +929,7 @@
         </ul>
         <a href="#contact" class="btn-outline" style="text-align:center; display:block;">Get Started</a>
       </div>
-
+ 
     </div>
   </section>
  
@@ -892,3 +986,4 @@
  
 </body>
 </html>
+ 
